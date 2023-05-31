@@ -29,7 +29,19 @@ def index_image():
         file.save(filepath)
         files = {'file': open(filepath, 'rb')}
         print(files)
-        apicall = requests.post(API_URL, files=files)
+
+        
+
+        # Agregamos el header ------------------------------------------------------
+        headers = {
+            "MiEncabezado": "PongaAquiSuHeader"
+        }
+
+        apicall = requests.post(API_URL, files=files, headers=headers)
+
+        #------------------------------------------------------
+
+        
         if apicall.status_code == 200:
             error = None
             apicall = json.loads(apicall.content.decode('utf-8'))
